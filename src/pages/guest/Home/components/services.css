@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap');
+
+.services-premium {
+  font-family: "Manrope", "Helvetica Neue", Arial, sans-serif;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  opacity: 0;
+  animation: fade-up 0.7s ease-out forwards;
+}
+
+.animate-fade-up-child {
+  opacity: 0;
+  animation: fade-up 0.55s ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .animate-fade-up-child {
+    opacity: 1;
+    animation: none;
+    transform: none;
+  }
+}
