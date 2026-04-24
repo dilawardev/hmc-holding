@@ -79,14 +79,7 @@ export function ProjectsMapLockProvider({ children }) {
         pagePath,
       };
 
-      try {
-        await submitProjectsMapInquiry(requestPayload);
-      } catch (error) {
-        console.warn(
-          "Projects map inquiry send failed",
-          error?.message || error,
-        );
-      }
+      await submitProjectsMapInquiry(requestPayload);
 
       setIsUnlocked(true);
       setContact(requestPayload);

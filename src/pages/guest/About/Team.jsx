@@ -4,8 +4,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useAppReady } from "@/context/AppReadyContext";
 import Breadcrumbs from "@/components/navigation/Breadcrumbs";
 
-import MerzanPortrait from "@/assets/ceo/Portait-Merzan-2.png";
-import BilelPortrait from "@/assets/team/bilel.jpg";
+import MerzanPortrait from "@/assets/ceo/IMG_6429.PNG";
+import BilelPortrait from "@/assets/ceo/IMG_6243.PNG";
 
 gsap.registerPlugin(ScrollTrigger);
 

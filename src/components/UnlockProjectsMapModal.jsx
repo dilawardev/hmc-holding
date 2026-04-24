@@ -19,6 +19,7 @@ export default function UnlockProjectsMapModal({
   });
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   const dialogRef = useRef(null);
   const firstFieldRef = useRef(null);
@@ -34,6 +35,7 @@ export default function UnlockProjectsMapModal({
       email: initialData?.email || "",
     });
     setErrors({});
+    setSubmitError("");
     setSubmitting(false);
 
     const timer = window.setTimeout(() => {
@@ -106,6 +108,7 @@ export default function UnlockProjectsMapModal({
       ...currentForm,
       [name]: value,
     }));
+    setSubmitError("");
 
     setErrors((currentErrors) => {
       const nextErrors = { ...currentErrors };
@@ -156,6 +159,7 @@ export default function UnlockProjectsMapModal({
     if (!validate()) return;
 
     setSubmitting(true);
+    setSubmitError("");
 
     try {
       await onSubmit?.({
@@ -163,6 +167,12 @@ export default function UnlockProjectsMapModal({
         phone: form.phone.trim(),
         email: form.email.trim().toLowerCase(),
       });
+    } catch (error) {
+      setSubmitError(
+        error instanceof Error
+          ? error.message
+          : "We could not send your map access request right now. Please try again shortly.",
+      );
     } finally {
       setSubmitting(false);
     }
@@ -302,6 +312,10 @@ export default function UnlockProjectsMapModal({
               {submitting ? "Submitting..." : "Unlock Projects Map"}
               <ArrowRight className="h-4 w-4" />
             </button>
+
+            {submitError ? (
+              <p className="text-sm text-rose-300">{submitError}</p>
+            ) : null}
           </form>
         </div>
       </div>
