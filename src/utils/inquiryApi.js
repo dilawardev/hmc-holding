@@ -48,6 +48,10 @@ export function submitCalculatorInquiry(payload) {
   return postJson("/inquiries/calculator", payload);
 }
 
+export function submitMortgageCalculatorInquiry(payload) {
+  return postJson("/inquiries/mortgage-calculator", payload);
+}
+
 export function submitLegalInquiry(payload) {
   return postJson("/inquiries/legal", payload);
 }

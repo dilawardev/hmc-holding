@@ -7,11 +7,17 @@ import {
   ChevronRight,
   Clock3,
   Globe,
+  Landmark,
   LineChart,
   Settings2,
   ShieldCheck,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { A11y, Autoplay, Pagination } from "swiper/modules";
+
+import "swiper/css";
+import "swiper/css/pagination";
 
 import BlurText from "@/components/motion/BlurText";
 import FadeContent from "@/components/motion/FadeContent";
@@ -150,6 +156,59 @@ export default function Hero() {
     },
   ];
 
+  const featuredTools = [
+    {
+      Icon: Calculator,
+      title: "Business setup cost calculator",
+      description:
+        "Answer a few practical questions and get a clearer view of the setup path that fits your activity, office needs, shareholders, visas, and jurisdiction goals.",
+      to: "/calculator",
+      buttonLabel: "Open Business Calculator",
+      stats: [
+        {
+          Icon: Clock3,
+          title: "2-minute flow",
+          text: "Quick intake designed for serious founders and investors.",
+        },
+        {
+          Icon: ShieldCheck,
+          title: "Better-fit recommendations",
+          text: "Compare office, visa, and jurisdiction factors in one place.",
+        },
+        {
+          Icon: BriefcaseBusiness,
+          title: "Advisory follow-up",
+          text: "Turn the result into a practical HMC setup roadmap.",
+        },
+      ],
+    },
+    {
+      Icon: Landmark,
+      title: "Mortgage calculator",
+      description:
+        "Model monthly repayments, deposit pressure, and financing size before you move into bank discussions or commit to a property purchase.",
+      to: "/mortgage-calculator",
+      buttonLabel: "Open Mortgage Calculator",
+      stats: [
+        {
+          Icon: Building2,
+          title: "Property-fit planning",
+          text: "Stress-test price, deposit, rate, and loan term in one scenario builder.",
+        },
+        {
+          Icon: ShieldCheck,
+          title: "Repayment clarity",
+          text: "See the monthly payment and total finance cost update live.",
+        },
+        {
+          Icon: Clock3,
+          title: "Ready for review",
+          text: "Send the scenario to HMC when you want financing support.",
+        },
+      ],
+    },
+  ];
+
   return (
     <section className="relative overflow-hidden bg-transparent">
       <div className="pointer-events-none absolute inset-0">
@@ -190,92 +249,87 @@ export default function Hero() {
           <p className="mt-4 text-sm text-white/85 sm:text-base md:text-lg">
             We help organizations and individuals move confidently through
             investment, corporate growth, real estate, and immigration fast,
-            compliant, and future-ready. You can now also start with our guided
-            business setup calculator.
+            compliant, and future-ready. You can now start with our guided
+            business setup and mortgage calculators.
           </p>
 
           <FadeContent delay={300} blur duration={700} animateWhen={isReady}>
             <div className="mt-8 rounded-[28px] border border-white/15 bg-white/10 p-4 text-left shadow-[0_18px_40px_rgba(0,0,0,0.18)] backdrop-blur-md sm:p-5">
-              <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
-                <div className="flex items-start gap-4">
-                  <div className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-white/15 bg-white/10 text-[#D6B26F]">
-                    <Calculator className="h-6 w-6" />
-                  </div>
+              <Swiper
+                modules={[Autoplay, Pagination, A11y]}
+                slidesPerView={1}
+                loop
+                autoplay={{
+                  delay: 4800,
+                  disableOnInteraction: false,
+                }}
+                pagination={{ clickable: true }}
+                className="hero-featured-swiper !pb-10"
+              >
+                {featuredTools.map((tool) => (
+                  <SwiperSlide key={tool.title} className="!h-auto">
+                    <div className="flex h-full flex-col">
+                      <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+                        <div className="flex items-start gap-4">
+                          <div className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-white/15 bg-white/10 text-[#D6B26F]">
+                            <tool.Icon className="h-6 w-6" />
+                          </div>
 
-                  <div>
-                    <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/80">
-                      <span className="h-2 w-2 rounded-full bg-[#D6B26F]" />
-                      Featured Tool
+                          <div>
+                            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/80">
+                              <span className="h-2 w-2 rounded-full bg-[#D6B26F]" />
+                              Featured Tool
+                            </div>
+                            <h3 className="mt-3 text-lg font-semibold text-white sm:text-xl">
+                              {tool.title}
+                            </h3>
+                            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-white/75 sm:text-[15px]">
+                              {tool.description}
+                            </p>
+                          </div>
+                        </div>
+
+                        <Link
+                          to={tool.to}
+                          className="group inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-[#D6B26F] px-5 py-3 text-sm font-semibold text-[#0D354C] transition hover:-translate-y-0.5 hover:shadow-xl"
+                        >
+                          {tool.buttonLabel}
+                          <ChevronRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
+                        </Link>
+                      </div>
+
+                      <div className="mt-5 grid gap-3 sm:grid-cols-3">
+                        {tool.stats.map((stat) => (
+                          <div
+                            key={stat.title}
+                            className="rounded-2xl border border-white/10 bg-white/[0.08] px-4 py-3 text-sm text-white/85"
+                          >
+                            <div className="flex items-center gap-2 text-[#D6B26F]">
+                              <stat.Icon className="h-4 w-4" />
+                              <span className="font-semibold text-white">
+                                {stat.title}
+                              </span>
+                            </div>
+                            <p className="mt-2 text-white/70">{stat.text}</p>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                    <h3 className="mt-3 text-lg font-semibold text-white sm:text-xl">
-                      Business setup cost calculator
-                    </h3>
-                    <p className="mt-2 max-w-2xl text-sm leading-relaxed text-white/75 sm:text-[15px]">
-                      Answer a few practical questions and get a clearer view of
-                      the setup path that fits your activity, office needs,
-                      shareholders, visas, and jurisdiction goals.
-                    </p>
-                  </div>
-                </div>
-
-                <Link
-                  to="/calculator"
-                  className="group inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-[#D6B26F] px-5 py-3 text-sm font-semibold text-[#0D354C] transition hover:-translate-y-0.5 hover:shadow-xl"
-                >
-                  Open Calculator
-                  <ChevronRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
-                </Link>
-              </div>
-
-              <div className="mt-5 grid gap-3 sm:grid-cols-3">
-                <div className="rounded-2xl border border-white/10 bg-white/[0.08] px-4 py-3 text-sm text-white/85">
-                  <div className="flex items-center gap-2 text-[#D6B26F]">
-                    <Clock3 className="h-4 w-4" />
-                    <span className="font-semibold text-white">
-                      2-minute flow
-                    </span>
-                  </div>
-                  <p className="mt-2 text-white/70">
-                    Quick intake designed for serious founders and investors.
-                  </p>
-                </div>
-
-                <div className="rounded-2xl border border-white/10 bg-white/[0.08] px-4 py-3 text-sm text-white/85">
-                  <div className="flex items-center gap-2 text-[#D6B26F]">
-                    <ShieldCheck className="h-4 w-4" />
-                    <span className="font-semibold text-white">
-                      Better-fit recommendations
-                    </span>
-                  </div>
-                  <p className="mt-2 text-white/70">
-                    Compare office, visa, and jurisdiction factors in one place.
-                  </p>
-                </div>
-
-                <div className="rounded-2xl border border-white/10 bg-white/[0.08] px-4 py-3 text-sm text-white/85">
-                  <div className="flex items-center gap-2 text-[#D6B26F]">
-                    <BriefcaseBusiness className="h-4 w-4" />
-                    <span className="font-semibold text-white">
-                      Advisory follow-up
-                    </span>
-                  </div>
-                  <p className="mt-2 text-white/70">
-                    Turn the result into a practical HMC setup roadmap.
-                  </p>
-                </div>
-              </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
             </div>
           </FadeContent>
 
           <div className="mt-9 flex gap-2 overflow-x-auto no-scrollbar pb-2 sm:flex-wrap sm:justify-center sm:overflow-visible">
-            {chips.map(({ Icon, text, to }) => (
+            {chips.map((chip) => (
               <Link
-                key={text}
-                to={to}
+                key={chip.text}
+                to={chip.to}
                 className="group shrink-0 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-2 text-[11px] text-white/90 backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/15 hover:text-white sm:text-xs"
               >
-                <Icon className="h-4 w-4 text-[#D6B26F] transition group-hover:scale-110" />
-                {text}
+                <chip.Icon className="h-4 w-4 text-[#D6B26F] transition group-hover:scale-110" />
+                {chip.text}
               </Link>
             ))}
           </div>
@@ -308,26 +362,39 @@ export default function Hero() {
           50%  { transform: translate3d(0, -14px, 0) }
           100% { transform: translate3d(0, 0, 0) }
         }
+
+        .hero-featured-swiper .swiper-pagination {
+          bottom: 0 !important;
+        }
+
+        .hero-featured-swiper .swiper-pagination-bullet {
+          background: rgba(255, 255, 255, 0.35);
+          opacity: 1;
+        }
+
+        .hero-featured-swiper .swiper-pagination-bullet-active {
+          background: #D6B26F;
+        }
       `}</style>
     </section>
   );
 }
 
-function FloatingIcon({
-  Icon,
-  label,
-  left,
-  top,
-  iconSize,
-  depth,
-  blur,
-  opacity,
-  t,
-  d,
-  className = "",
-  fadeDelay = 0,
-  animateWhen = true,
-}) {
+function FloatingIcon(props) {
+  const {
+    label,
+    left,
+    top,
+    iconSize,
+    depth,
+    blur,
+    opacity,
+    t,
+    d,
+    className = "",
+    fadeDelay = 0,
+    animateWhen = true,
+  } = props;
   const clamp = (v) => `min(${v}, calc(100% - 6rem))`;
 
   return (
@@ -357,7 +424,7 @@ function FloatingIcon({
                 blur,
               ].join(" ")}
             >
-              <Icon className={`${iconSize} text-[#D6B26F]`} />
+              <props.Icon className={`${iconSize} text-[#D6B26F]`} />
             </div>
 
             <div className="pointer-events-none absolute left-1/2 top-full mt-3 hidden -translate-x-1/2 whitespace-nowrap rounded-full border border-white/15 bg-black/25 px-3 py-1 text-xs text-white/90 opacity-0 transition backdrop-blur md:block group-hover:opacity-100">

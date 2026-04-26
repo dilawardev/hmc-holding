@@ -28,6 +28,7 @@ import {
 } from "lucide-react";
 
 import CTA from "@/pages/guest/Home/components/CTA";
+import ThemedSelect from "@/components/forms/ThemedSelect";
 import { submitCalculatorInquiry } from "@/utils/inquiryApi";
 
 import PartnerLogo01 from "@/assets/partners/logo_01_4fd8dc607d.webp";
@@ -1119,11 +1120,14 @@ function renderStepContent(stepIndex, answers, updateAnswer) {
         onChange={(value) => updateAnswer("phone", value)}
       />
 
-      <SelectField
+      <ThemedSelect
         label="Nationality"
         value={answers.nationality}
         onChange={(value) => updateAnswer("nationality", value)}
         options={nationalityOptions}
+        placeholder="Select your nationality"
+        icon={Globe2}
+        textSize="text-base"
       />
 
       <BinaryField
@@ -1317,29 +1321,6 @@ function TextField({
         onChange={(event) => onChange(event.target.value)}
         className="w-full rounded-2xl border border-[#0D354C]/10 bg-white px-4 py-3.5 text-base text-[#0D354C] outline-none transition placeholder:text-slate-400 focus:border-[#D6B26F] focus:ring-2 focus:ring-[#D6B26F]/20"
       />
-    </label>
-  );
-}
-
-function SelectField({ label, value, onChange, options }) {
-  return (
-    <label className="block">
-      <span className="mb-2 flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.16em] text-slate-500">
-        <Globe2 className="h-4 w-4 text-[#D6B26F]" />
-        {label}
-      </span>
-      <select
-        value={value}
-        onChange={(event) => onChange(event.target.value)}
-        className="w-full rounded-2xl border border-[#0D354C]/10 bg-white px-4 py-3.5 text-base text-[#0D354C] outline-none transition focus:border-[#D6B26F] focus:ring-2 focus:ring-[#D6B26F]/20"
-      >
-        <option value="">Select your nationality</option>
-        {options.map((option) => (
-          <option key={option} value={option}>
-            {option}
-          </option>
-        ))}
-      </select>
     </label>
   );
 }

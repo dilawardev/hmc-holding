@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 
 import { ServicePageShell } from "@/pages/guest/Services/components/service-pages/ServicePagePrimitives";
+import ThemedSelect from "@/components/forms/ThemedSelect";
 import { submitLegalInquiry } from "@/utils/inquiryApi";
 import advisoryMeetingImage from "@/assets/services/business-investment-advisory/business-consulting-and-development/advisory-meeting.jpg";
 import executiveMeetingImage from "@/assets/services/visa-immigration-services/investor-and-partner-visas/executive-meeting.jpg";
@@ -510,7 +511,7 @@ export default function LegalServices() {
                     placeholder="+971 50 000 0000"
                     onChange={(value) => updateForm("phone", value)}
                   />
-                  <SelectField
+                  <ThemedSelect
                     label="Nationality"
                     name="nationality"
                     value={form.nationality}
@@ -518,8 +519,9 @@ export default function LegalServices() {
                     placeholder="Select nationality"
                     required
                     onChange={(value) => updateForm("nationality", value)}
+                    icon={Globe2}
                   />
-                  <SelectField
+                  <ThemedSelect
                     label="Will type"
                     name="willType"
                     value={form.willType}
@@ -527,6 +529,7 @@ export default function LegalServices() {
                     placeholder="Select option"
                     required
                     onChange={(value) => updateForm("willType", value)}
+                    icon={FileCheck2}
                   />
 
                   <button
@@ -849,35 +852,3 @@ function Field({
   );
 }
 
-function SelectField({
-  label,
-  name,
-  value,
-  options,
-  placeholder,
-  required = false,
-  onChange,
-}) {
-  return (
-    <label className="block">
-      <span className="mb-2 flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.16em] text-slate-500">
-        <Globe2 className="h-4 w-4 text-[#D6B26F]" />
-        {label}
-      </span>
-      <select
-        name={name}
-        value={value}
-        required={required}
-        onChange={(event) => onChange?.(event.target.value)}
-        className="w-full rounded-2xl border border-[#0D354C]/10 bg-white px-4 py-3.5 text-sm text-[#0D354C] outline-none transition focus:border-[#D6B26F] focus:ring-2 focus:ring-[#D6B26F]/20"
-      >
-        <option value="">{placeholder}</option>
-        {options.map((option) => (
-          <option key={option} value={option}>
-            {option}
-          </option>
-        ))}
-      </select>
-    </label>
-  );
-}

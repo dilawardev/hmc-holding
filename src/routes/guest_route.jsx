@@ -5,6 +5,7 @@ import Blog from "@/pages/guest/Blog/Blog";
 import BlogDetail from "@/pages/guest/Blog/BlogDetail";
 import Careers from "@/pages/guest/Career/Careers";
 import CalculatorPage from "@/pages/guest/Calculator/Calculator";
+import MortgageCalculatorPage from "@/pages/guest/Calculator/MortgageCalculator";
 import ContactUs from "@/pages/guest/Contact/ContactUs";
 import Home from "@/pages/guest/Home/Home";
 import ProjectsMap from "@/pages/guest/Projects/ProjectsMap";
@@ -51,6 +52,7 @@ const guestRoutes = {
   "/team": Team,
   "/careers": Careers,
   "/calculator": CalculatorPage,
+  "/mortgage-calculator": MortgageCalculatorPage,
   "/business-consulting": BusinessConsulting,
   "/business-development": BusinessDevelopment,
   "/investor-projects": InvestorProjects,
